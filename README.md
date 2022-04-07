@@ -1,3 +1,25 @@
+# Este proyecto to do no contiene la opcion de editar solo agregar, tachar y eliminar tareas las cuales se almacenan en locale storage 
+
+## Screenshots del proyecto:
+
+### App sin tareas
+<img src="https://github.com/XmauricioX/TO-DO---REACT-REDUCER/blob/main/screenshots/0.png" alt="tareasApp">
+
+### Agregando una tarea
+<img src="https://github.com/XmauricioX/TO-DO---REACT-REDUCER/blob/main/screenshots/1.png" alt="tareasApp">
+
+### Tarea agregada
+<img src="https://github.com/XmauricioX/TO-DO---REACT-REDUCER/blob/main/screenshots/2.png" alt="tareasApp">
+
+### Tachando una tarea
+<img src="https://github.com/XmauricioX/TO-DO---REACT-REDUCER/blob/main/screenshots/3.png" alt="tareasApp">
+
+### Agregando otra tarea para mostra el borrado
+<img src="https://github.com/XmauricioX/TO-DO---REACT-REDUCER/blob/main/screenshots/4.png" alt="tareasApp">
+
+### Borrando una tarea
+<img src="https://github.com/XmauricioX/TO-DO---REACT-REDUCER/blob/main/screenshots/5.png" alt="tareasApp">
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
