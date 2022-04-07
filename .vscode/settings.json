@@ -1,0 +1,12 @@
+{
+  "editor.minimap.maxColumn": 500,
+  "editor.minimap.enabled": true,
+  "diffEditor.wordWrap": "off",
+  "diffEditor.renderSideBySide": true,
+  "diffEditor.maxFileSize": 0,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "editor.minimap.scale": 1,
+  "editor.minimap.side": "right",
+  "editor.minimap.size": "proportional",
+  "editor.minimap.renderCharacters": true
+}

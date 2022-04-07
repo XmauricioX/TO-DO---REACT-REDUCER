@@ -1,29 +1,49 @@
-import { useReducer } from 'react';
-import {tareasReducer} from "./reducers/tareasReducer"
+import { useReducer, useEffect } from 'react';
+import { tareasReducer } from "./reducers/tareasReducer"
 import './App.css';
 import { useForm } from './hooks/useForm';
 
-const initialState = [
-  {
-    id : new Date().getTime(),
-    descripcion : "Aprender initialState",
-    terminada : false
-  }
-]
+
+
+const init = () => {
+  /*reurn [
+    {
+      id : new Date().getTime(),
+      descripcion : "Aprender initialState",
+      terminada : false
+    }
+  ] */
+  return JSON.parse(localStorage.getItem('tareas')) || []
+}
+
 
 
 function App() {
 
   
-  const [tareas, dispatch] = useReducer(tareasReducer, initialState)
+  const [tareas, dispatch] = useReducer(tareasReducer, [], init)
+
   
+
+  const [ {descripcion}, handleInputChange, reset ] = useForm({
+    descripcion : ''
+  })
+
+  useEffect(() => {
+    localStorage.setItem('tareas', JSON.stringify(tareas))
+  }, [tareas])
+
   const handleSubmit = (e) => {
-    
+
       e.preventDefault();
+
+      if(descripcion.trim().length < 1){
+        return
+      }
 
       let nuevaTarea = {
         id : new Date().getTime(),
-        descripcion : "Aprender React",
+        descripcion,
         terminada : false
       }
     
@@ -34,11 +54,30 @@ function App() {
       
       dispatch(agregarTarea)
 
+      reset()
+
   }
 
-  useForm({
-    descripcion : ""
-  })
+  const handleDelete = (id) => {
+
+    const borrarTarea = {
+      type : "borrar",
+      payload : id
+    }
+
+    dispatch(borrarTarea)
+
+  }
+
+  const handleFinish = (id) => {
+    const tacharTarea = {
+      type : "tachar",
+      payload : id
+    }
+
+    dispatch(tacharTarea)
+
+  }
 
   return (
     <div className="App">
@@ -55,19 +94,25 @@ function App() {
 
           <ul className='list-group list-group-flush px-4'>
             {
-              tareas.map(({descripcion,terminada}, i) => (
+              tareas.map(({descripcion, terminada, id}, i) => (
                 <li
                   key = {descripcion + i} 
                   className='d-flex justify-content-between align-items-center'
                 >
-                  <p>
-                    { i + 1 } . { descripcion }
-                  </p>
 
-                  <button className='btn btn-sm btn-danger mb-1'>
+                <p className={ terminada && 'text-decoration-line-through'} >
+                  {/* el && es un if minificado, si se cumple la condicion se ejecuta lo que sigue, si no se cumple no se ejecuta*/ }
+                  { i + 1 } . { descripcion }
+                </p>
+
+                <div>
+                  <button onClick={ ()=> handleFinish(id)}  className='btn btn-sm me-4 mb-1'>
+                   <i className= {terminada? "fas fa-eraser btn btn-danger" : "fas fa-check btn btn-success"}></i>
+                  </button>
+                  <button onClick={ ()=> handleDelete(id) } className='btn btn-sm btn-danger mb-1'>
                     <i className='fas fa-trash-alt'></i>
                   </button>
-
+                </div>
                 </li>
               ))
             }
@@ -88,6 +133,8 @@ function App() {
               autoComplete='off'
               className='form-control'
               name='descripcion'
+              onChange={handleInputChange}
+              value={descripcion}
               >
             </input>
 
